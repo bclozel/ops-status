@@ -1,0 +1,17 @@
+pluginManagement {
+	repositories {
+		mavenCentral()
+		gradlePluginPortal()
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
+	}
+	resolutionStrategy {
+		eachPlugin {
+			if (requested.id.id == "io.spring.javaformat") {
+				useModule "io.spring.javaformat:spring-javaformat-gradle-plugin:${requested.version}"
+			}
+		}
+	}
+}
+
+rootProject.name = 'ops-status'

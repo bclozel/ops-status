@@ -1,0 +1,23 @@
+{
+  "plugins": [
+    {
+      "name": "delay",
+      "args": {
+        "duration": 300
+      }
+    }
+  ],
+  "request": {
+    "method": "get",
+    "path": "\\/[a-z-]*\\/available"
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "status": "OK"
+    }
+  }
+}
