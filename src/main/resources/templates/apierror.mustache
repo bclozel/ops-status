@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Online Gaming - {{exception.body.title}}</title>
+    <link href="/css/nes.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="#"><h1><i class="snes-jp-logo logo"></i>Spring gaming</h1></a>
+        <p>Online services status.</p>
+    </nav>
+</header>
+<main id="apierror">
+    <div class="nes-container with-title">
+      <p class="title">API Error</p>
+      <p>{{exception.body.detail}}</p>
+        <section class="icon-list">
+            <i class="nes-icon is-large heart"></i>
+            <i class="nes-icon is-large heart"></i>
+            <i class="nes-icon is-large is-half heart"></i>
+            <i class="nes-icon is-large is-transparent heart"></i>
+        </section>
+    </div>
+</main>
+</body>
+</html>

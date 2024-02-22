@@ -1,0 +1,58 @@
+@charset "utf-8";
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
+body {
+    padding: 0 2rem;
+    margin: 0 2rem;
+}
+
+header {
+    text-align: center;
+}
+
+header .logo {
+    margin-right: 1rem;
+}
+
+#dashboard {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+#apierror {
+    max-width: 980px;
+    margin: 4em auto;
+}
+
+#incidents, #infrastructure {
+    margin-bottom: 2rem;
+}
+
+.item {
+    margin-bottom: 1.5rem;
+}
+
+.item > * {
+    margin-bottom: 1.5rem !important;
+}
+
+.incident > button {
+
+}
+
+.scroll-btn.active {
+    bottom: 25px;
+}
+
+.scroll-btn {
+    position: fixed;
+    bottom: -60px;
+    right: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .6);
+    transition: all 0.3s ease;
+}
+
+.scroll-btn > span {
+    display: block;
+    transform: rotateZ(90deg);
+}

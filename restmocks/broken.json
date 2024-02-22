@@ -1,0 +1,23 @@
+{
+  "plugins": [
+    {
+      "name": "delay",
+      "args": {
+        "duration": 2000
+      }
+    }
+  ],
+  "request": {
+    "method": "get",
+    "path": "\\/[a-z-]*\\/broken"
+  },
+  "response": {
+    "statusCode": 503,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "body": {
+      "status": "DOWN"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "about:blank",
+  "title": "Not Found",
+  "status": 404,
+  "detail": "Could not find an incident with id '42'.",
+  "instance": "/api/incidents/42"
+}
