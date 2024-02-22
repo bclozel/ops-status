@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Online Gaming - Status page</title>
+    <link href="/css/nes.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="#"><h1><i class="snes-jp-logo logo"></i>Spring gaming</h1></a>
+        <p>Online services status.</p>
+    </nav>
+</header>
+<main id="dashboard">
+    <div id="infrastructure">
+        <h2><a href="#infrastructure">#</a>Infrastructure</h2>
+        <p>Current Status of our online platform.</p>
+        <div class="nes-table-responsive">
+            <table class="nes-table is-bordered is-centered">
+                <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Availability</th>
+                    <th>Last checked</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#components}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td><a href="#" class="nes-badge">
+                            <span class="{{#isOperational}}is-success{{/isOperational}}{{#isPartiallyAvailable}}is-warning{{/isPartiallyAvailable}}{{#isUnavailable}}is-error{{/isUnavailable}}">{{availability}}</span>
+                        </a>
+                        </td>
+                        <td>{{#lastCheckedOn}}{{.}}{{/lastCheckedOn}}{{^lastCheckedOn}}N/A{{/lastCheckedOn}}</td>
+                    </tr>
+                {{/components}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="incidents">
+        <h2><a href="#incidents">#</a>Incidents</h2>
+        <section id="current" class="nes-container with-title item">
+            <p class="title">In progress</p>
+            {{#inProgress}}
+                <h2>{{title}}</h2>
+                <small>Created on {{happenedOn}}</small>
+                <p>{{description}}</p>
+            {{/inProgress}}
+            {{^inProgress}}
+                <span class="nes-text is-success">No incident!</span>
+            {{/inProgress}}
+        </section>
+        <section id="scheduled" class="nes-container with-title item">
+            <p class="title">Scheduled Maintenance</p>
+            {{#scheduled}}
+                <div class="incident nes-container is-rounded with-title">
+                    <p class="title nes-text is-primary">{{title}}</p>
+                    <small>on {{happenedOn}}</small>
+                    <p>{{description}}</p>
+                    <a class="nes-btn" href="#">Details</a>
+                </div>
+            {{/scheduled}}
+        </section>
+        <section id="past" class="nes-container with-title item">
+            <p class="title">Past Incidents</p>
+            {{#resolved}}
+                <div class="incident nes-container is-rounded with-title">
+                    <p class="title nes-text is-error">{{title}}</p>
+                    <small>on {{happenedOn}}</small>
+                    <p>{{description}}</p>
+                    <a class="nes-btn" href="#">Details</a>
+                </div>
+            {{/resolved}}
+        </section>
+    </div>
+    <div id="api">
+        <section class="nes-container">
+            <section class="message-list">
+                <section class="message -left">
+                    <i class="nes-bcrikko"></i>
+                    <div class="nes-balloon from-left">
+                        <p>Hello, is there a REST API for incidents?</p>
+                    </div>
+                </section>
+
+                <section class="message -right">
+                    <div class="nes-balloon from-right">
+                        <p>Yes, right here: <a href="/api/incidents">/api/incidents</a>!</p>
+                    </div>
+                    <i class="nes-bcrikko"></i>
+                </section>
+            </section>
+        </section>
+
+    </div>
+
+    <button type="button" id="scrolltop" class="nes-btn is-error scroll-btn active">
+        <span>&lt;</span>
+    </button>
+</main>
+</body>
+<script>
+    document.getElementById("scrolltop").addEventListener('click', function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    })
+</script>
+</html>
