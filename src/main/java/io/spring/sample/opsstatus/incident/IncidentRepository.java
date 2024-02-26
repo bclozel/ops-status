@@ -6,9 +6,10 @@ import java.util.stream.Stream;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface IncidentRepository extends PagingAndSortingRepository<Incident, Long> {
+public interface IncidentRepository extends CrudRepository<Incident, Long>, PagingAndSortingRepository<Incident, Long> {
 
 	List<Incident> findAllByStatusOrderByHappenedOnDesc(IncidentStatus status);
 
