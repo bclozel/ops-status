@@ -4,32 +4,29 @@ import io.spring.sample.opsstatus.availability.Availability;
 import io.spring.sample.opsstatus.availability.InfrastructureComponent;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 public class AvailabilityCheckClient {
 
-	private final RestTemplate client;
+	private final RestClient client;
 
 	public AvailabilityCheckClient(RestTemplateBuilder builder, String serviceUrl) {
-		this.client = builder.rootUri(serviceUrl).build();
+		this.client = RestClient.create(builder.rootUri(serviceUrl).build());
 	}
 
 	public Availability checkAvailability(InfrastructureComponent component) {
 
-		HttpHeaders requestHeaders = new HttpHeaders();
-		requestHeaders.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
-		requestHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer " + component.getCheckToken());
-		HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
-
 		try {
-			ResponseEntity<AvailabilityResponse> response = this.client.exchange(component.getCheckUri(),
-					HttpMethod.GET, requestEntity, AvailabilityResponse.class);
+			ResponseEntity<AvailabilityResponse> response = this.client.get()
+				.uri(component.getCheckUri())
+				.accept(MediaType.APPLICATION_JSON)
+				.header(HttpHeaders.AUTHORIZATION, "Bearer " + component.getCheckToken())
+				.retrieve()
+				.toEntity(AvailabilityResponse.class);
 			return getAvailability(response.getBody());
 		}
 		catch (RestClientException ex) {
