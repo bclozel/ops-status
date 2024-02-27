@@ -1,6 +1,6 @@
 # How to run this application locally
 
-You need Java 17 and Docker
+You need Java 21 and Docker
 
 ```
  ███████████                            ███████████                    █████                                 █████████     ██████    █████      
