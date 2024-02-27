@@ -3,7 +3,6 @@ package io.spring.sample.opsstatus.checker;
 import io.spring.sample.opsstatus.availability.Availability;
 import io.spring.sample.opsstatus.availability.InfrastructureComponent;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,8 @@ public class AvailabilityCheckClient {
 
 	private final RestClient client;
 
-	public AvailabilityCheckClient(RestTemplateBuilder builder, String serviceUrl) {
-		this.client = RestClient.create(builder.rootUri(serviceUrl).build());
+	public AvailabilityCheckClient(RestClient.Builder builder, String serviceUrl) {
+		this.client = builder.baseUrl(serviceUrl).build();
 	}
 
 	public Availability checkAvailability(InfrastructureComponent component) {

@@ -10,12 +10,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.RequestMatcher;
+import org.springframework.web.client.RestClient;
 
 import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,9 +42,9 @@ class AvailabilityCheckClientTests {
 
 	private final MockRestServiceServer server;
 
-	AvailabilityCheckClientTests(@Autowired RestTemplateBuilder restTemplateBuilder,
+	AvailabilityCheckClientTests(@Autowired RestClient.Builder restClientBuilder,
 			@Autowired MockRestServiceServer server) {
-		this.client = new AvailabilityCheckClient(restTemplateBuilder, "https://example.com");
+		this.client = new AvailabilityCheckClient(restClientBuilder, "https://example.com");
 		this.server = server;
 	}
 
