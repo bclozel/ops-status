@@ -25,6 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'net.datafaker:datafaker:2.2.2'
 
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
 	runtimeOnly 'org.flywaydb:flyway-core'
 	runtimeOnly 'org.postgresql:postgresql'
 
