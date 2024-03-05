@@ -1,5 +1,7 @@
 # How to run this application locally
 
+You need Java 17 and Docker
+
 ```
  ███████████                            ███████████                    █████                                 █████████     ██████    █████      
 ░░███░░░░░███                          ░░███░░░░░███                  ░░███                                 ███░░░░░███  ███░░░░███ ░░███       
@@ -15,6 +17,8 @@
 ```
 
 Run a PostgreSQL server on your local machine on port 5432 with default password "secret".
+
+Oh, and you need to run the mocks server as well, see `scripts/run-mocks.sh`.
 
 Signed: Your friendly project team.
 ( ¬_¬)
