@@ -1,4 +1,11 @@
 services:
+  restmocks:
+    image: dotronglong/faker:stable
+    container_name: restmocks
+    ports:
+      - '3030:3030'
+    volumes:
+      - ./docker/restmocks:/app/mocks
   postgres:
     image: postgres:15.6-alpine
     container_name: postgres
