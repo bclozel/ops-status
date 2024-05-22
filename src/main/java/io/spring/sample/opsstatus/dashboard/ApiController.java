@@ -12,6 +12,7 @@ import io.spring.sample.opsstatus.incident.ItemType;
 import io.spring.sample.opsstatus.incident.ReportItem;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,12 @@ public class ApiController {
 	@GetMapping("/incidents")
 	public IncidentsDescriptor incidents() {
 		return new IncidentsDescriptor(this.repository.streamAll().map(IncidentInfo::fromIncident).toList());
+	}
+
+	@GetMapping("/incident/{id}")
+	public IncidentInfo incident(@PathVariable long id) {
+		return IncidentInfo.fromIncident(this.repository.findById(id)
+				.orElseThrow(() -> new NoSuchIncidentException(id)));
 	}
 
 	public record IncidentsDescriptor(List<IncidentInfo> incidents) {
