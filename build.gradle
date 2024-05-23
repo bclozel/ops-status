@@ -27,6 +27,9 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	runtimeOnly 'io.micrometer:micrometer-tracing-bridge-brave'
+	runtimeOnly 'io.zipkin.reporter2:zipkin-reporter-brave'
 	runtimeOnly 'org.flywaydb:flyway-database-postgresql'
 	runtimeOnly 'org.postgresql:postgresql'
 

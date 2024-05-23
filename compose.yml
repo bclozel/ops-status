@@ -10,7 +10,45 @@ services:
       - '5432:5432'
     volumes:
       - postgres:/var/lib/postgresql/data
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: unless-stopped
+    extra_hosts: [ 'host.docker.internal:host-gateway' ]
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./docker/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - prometheus:/var/lib/prometheus/data
+    command:
+      - "--enable-feature=exemplar-storage"
+      - "--web.enable-remote-write-receiver"
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    restart: unless-stopped
+    extra_hosts: [ 'host.docker.internal:host-gateway' ]
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    volumes:
+      - ./docker/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./docker/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - grafana:/var/lib/grafana
+  zipkin:
+    image: ghcr.io/openzipkin/zipkin-slim
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - '9411:9411'
 
 volumes:
   postgres:
+    driver: local
+  prometheus:
+    driver: local
+  grafana:
     driver: local
