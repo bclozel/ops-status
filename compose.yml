@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15.6-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=opsstatus
+      - POSTGRES_USER=spring
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+    driver: local
