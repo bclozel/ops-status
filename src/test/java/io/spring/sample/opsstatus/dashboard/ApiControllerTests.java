@@ -31,7 +31,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(controllers = ApiController.class)
 class ApiControllerTests {
@@ -81,6 +83,16 @@ class ApiControllerTests {
 				.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON))
 				.andExpect(content().json(readJson(new ClassPathResource("missing-incident-42.json", getClass())),true));
+	}
+
+	@Test
+	void incidentWithNoSuchIncidentErrorView() throws Exception {
+		when(this.incidentRepository.findById(42L)).thenReturn(Optional.empty());
+		mvc.perform(get("/api/incidents/42").accept(MediaType.TEXT_HTML))
+				.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+				.andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+				.andExpect(view().name("apierror"))
+				.andExpect(model().attributeExists("exception"));
 	}
 
 	private Matcher<?> jsonIncidentMatcher(Incident incident) {
